@@ -3,10 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Cours DOM</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <script src="index.js"></script>
+    <main>
+      <button class="btn">Alerter</button>
+      <div class="alert-box">
+        <div class="icone">
+          <a class="fas fa-check"></a>
+        </div>
+        <div class="texte">
+          <h1>Félicitation</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+            accusamus accusantium sapiente eaque laborum earum ad quidem aut
+            ipsam omnis dolor fuga aperiam voluptatibus voluptates at,
+            laboriosam architecto quo libero.
+          </p>
+        </div>
+        <button class="fermer">Fermer</button>
+      </div>
+    </main>
+    <script>
+      // Selection des éléments que je vais utiliser
+      const btnOuvrir = document.querySelector(".btn");
+      const boite = document.querySelector(".alert-box");
+      const btnFermer = document.querySelector(".fermer");
+
+      // Ajouter la classe sur boite
+      btnOuvrir.addEventListener("click", () => {
+        btnOuvrir.style.display = "none";
+        boite.classList.add("active");
+      });
+
+      // Pour fermer
+      btnFermer.addEventListener("click", () => {
+        boite.classList.remove("active");
+        btnOuvrir.style.display = "block";
+      });
+      // console.dir(document);
+
+      // console.log(document.title);
+      // Selection d'un element
+      // console.log(document.all[7]);
+
+      // Sélecteur en DOM
+      // Selection par nom de balise
+      // console.log(document.getElementsByTagName("h1"));
+      // Selection par id
+      // console.log(document.getElementById("titre1").textContent);
+
+      // Selection par classe
+      // console.log(document.getElementsByClassName("p1"));
+
+      // Selection global comme en css
+      // console.log(document.querySelector("#section1 .p1"));
+
+      // Modification du contenu
+      // const titre = document.querySelector("#titre1");
+      // titre.textContent = "Test titre";
+
+      // Ajouter un style
+      // titre.style.color = "red";
+      // titre.style.textAlign = "center";
+      // titre.style.fontSize = "40px";
+
+      //Ajouter, supprimer une classe
+      // const body = document.querySelector("body");
+      // body.classList.add("active");
+
+      // Les evenements
+      // const button = document.querySelector(".btn");
+
+      // const cliquer = () => {
+      //   console.log("salut");
+      //   body.classList.toggle("active");
+      //   button.textContent = "Je suis cliqué";
+      // };
+
+      // button.addEventListener("click", cliquer);
+    </script>
   </body>
 </html>
