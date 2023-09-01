@@ -24,7 +24,7 @@ export const generateDialogHTML = (product) => {
           </div>
         </div>
         <div class="sizes">
-          <p>Sizes :</p>
+          <p>Size:</p>
           <div class="container">
             <div class="size">XS</div>
             <div class="size active">S</div>
