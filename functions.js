@@ -1,5 +1,4 @@
 export const generateDialogHTML = (product) => {
-  console.log(product);
   return `
     <div class="product-page">
       <div class="gauche">
@@ -94,4 +93,20 @@ export const generateDialogHTML = (product) => {
       </div>
     </div>
     `;
+};
+
+export const generateCarte = (product) => {
+  return `
+  <div class="produit-item">
+  <img src='${product.img}' alt="" />
+  <div class="info">
+    <p class="nom">${product.nom}</p>
+    <p class="prix">${product.prix}</p>
+  </div>
+  <!-- Effacer -->
+  <div class="delete">
+    <i class="fa-solid fa-trash"></i>
+  </div>
+</div>
+  `;
 };

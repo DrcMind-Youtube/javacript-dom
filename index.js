@@ -1,10 +1,12 @@
 import { data } from "./data.js";
-import { generateDialogHTML } from "./functions.js";
+import { generateCarte, generateDialogHTML } from "./functions.js";
 
 // selection des elements
 const productsContainer = document.querySelector(".produits");
 const dialog = document.querySelector("dialog");
 const cartNumber = document.querySelector(".nombre");
+const carte = document.querySelector(".carte");
+const carteItemContainer = document.querySelector(".produit-carte");
 
 let currentItem = null;
 
@@ -50,8 +52,6 @@ function generateProductHTML(product) {
 
 // Code pour looper entre différents produits et les afficher
 
-console.log(generateProductHTML(data[0]));
-
 data.forEach((product) => {
   const productHTML = document.createElement("div");
   productHTML.classList.add("carte-produit");
@@ -62,6 +62,13 @@ data.forEach((product) => {
 
   productsContainer.appendChild(productHTML);
 });
+
+// Fonction pour tester si une fois un produit existe dans le panier
+
+const testerSiExiste = (produit, arr) => {
+  const ele = arr.find((p) => p.id === produit.id);
+  return ele ? true : false;
+};
 
 // Adding action on card click to display popover
 const cards = document.querySelectorAll(".carte-produit");
@@ -84,45 +91,41 @@ cards.forEach((card) => {
     // Selection element carte
     const btnAdd = document.querySelector(".ajouter");
     const qte = document.querySelector(".qte");
+    let existedeja = false;
     const numberOfTimeIncart = cartItems.filter(
       (item) => item.id === currentItem.id
     );
     qte.textContent = numberOfTimeIncart.length;
 
     // Verifier si l'item est deja dans le panier
-    const existe = cartItems.find((item) => item.id === currentItem.id);
-    if (existe) {
-      btnAdd.disabled = true;
-      btnAdd.textContent = "Ajouté";
-    } else {
-      btnAdd.disabled = false;
-      btnAdd.textContent = "Ajouter au panier";
-    }
 
     // Ajouter dans le panier
+    if (testerSiExiste(currentItem, cartItems)) {
+      btnAdd.textContent = "Efface du panier";
+      btnAdd.classList.add("ajoute");
+      qte.textContent = 1;
+    }
 
-    // Remove item
-
-    if (btnAdd.dataset.panier === "oui") {
-      console.log("test");
-      btnAdd.addEventListener("click", () => {
+    btnAdd.addEventListener("click", () => {
+      if (testerSiExiste(currentItem, cartItems)) {
+        const b = `  <div class="icon"><i class="fa-solid fa-plus"></i></div>
+          <p>Ajouter au panier</p>`;
+        btnAdd.innerHTML = b;
         cartItems = cartItems.filter((item) => item.id !== currentItem.id);
+        qte.textContent = 0;
         btnAdd.classList.remove("ajoute");
-        btnAdd.textContent = "Ajouter au panier";
-      });
-    } else {
-      btnAdd.addEventListener("click", () => {
-        console.log(btnAdd.textContent);
-        cartItems.push(currentItem);
+      } else {
         cartNumber.textContent = cartItems.length;
         btnAdd.textContent = "Efface du panier";
-        btnAdd.setAttribute("panier", "oui");
         btnAdd.classList.add("ajoute");
         qte.textContent = 1;
         console.log(cartItems);
-        console.log(btnAdd.dataset);
-      });
-    }
+        existedeja = true;
+        cartItems.push(currentItem);
+      }
+      cartNumber.textContent = cartItems.length;
+      console.log(btnAdd.dataset);
+    });
 
     const bgPng = document.querySelector(".gauche");
     // Colors
@@ -144,6 +147,29 @@ cards.forEach((card) => {
       });
     });
   });
+});
+
+// Afficher les produits dans panier
+
+carte.addEventListener("click", () => {
+  carteItemContainer.classList.add("active");
+  const produitsContainer = document.createElement("div");
+  produitsContainer.classList.add("p-item");
+
+  if (cartItems.length > 0) {
+    cartItems.map((item) => {
+      const q = generateCarte(item);
+      produitsContainer.appendChild(q);
+      console.log(q);
+    });
+
+    carte.appendChild(produitsContainer);
+  }
+});
+
+// fermer
+carte.addEventListener("mouseleave", () => {
+  carteItemContainer.classList.remove("active");
 });
 
 // Close popover
