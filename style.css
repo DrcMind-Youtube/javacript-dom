@@ -182,85 +182,6 @@ header form button:hover {
   cursor: pointer;
 }
 
-.actions .produit-carte {
-  position: absolute;
-  background-color: #fff;
-  top: 3rem;
-  right: 3rem;
-  width: 250px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(71, 71, 71, 0.3);
-  padding: 5px;
-  animation: aparition 0.3s ease;
-  display: none;
-}
-.produit-carte.active {
-  display: block;
-}
-@keyframes aparition {
-  0% {
-    transform: translateY(-50px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.produit-carte h2 {
-  font-size: 1rem;
-  color: var(--dark);
-  padding: 0.5rem;
-  font-weight: 900;
-}
-
-.produit-carte .p-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.4rem;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.produit-carte .produits::-webkit-scrollbar {
-  width: 0.4em;
-  border-radius: 10px;
-}
-
-.p-item .produit-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 10px;
-  justify-content: space-between;
-  gap: 10px;
-  border-bottom: 1px solid var(--color-secondary);
-}
-.produit-item img {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-}
-
-.produit-item .info {
-  display: flex;
-  flex-direction: column;
-  flex: 2;
-  gap: 0.4rem;
-}
-
-.info .nom {
-  font-size: 0.8rem;
-  color: var(--dark);
-  font-weight: 900;
-}
-
-.info .prix {
-  font-size: 0.6rem;
-  color: var(--grey);
-}
-
 .user img {
   width: 40px;
   height: 40px;
@@ -345,6 +266,7 @@ main .filtre {
 .carte-produit .img {
   width: 100%;
   height: 200px;
+  margin-top: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -450,6 +372,10 @@ main .filtre {
 
   .produits .carte-produit {
     width: 98%;
+  }
+
+  .carte-produit .img {
+    height: auto;
   }
 }
 
